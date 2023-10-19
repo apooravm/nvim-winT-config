@@ -1,0 +1,8 @@
+:TransparentEnable/Disable
+:PlugInstall
+:colorscheme minimalist 
+:AirlineTheme dark
+
+autocomplete
+ctr + y - select
+ctr + n - cycle through
