@@ -1,0 +1,41 @@
+{
+  "$schema": "https://raw.githubusercontent.com/apooravm/nvim-winT-config/main/themes/winT_theme.omp.json",
+  "blocks": [
+    {
+      "alignment": "left",
+      "segments": [
+        {
+          "background": "#bae61d",
+          "foreground": "#262b44",
+          "powerline_symbol": "\ue0b0",
+          "properties": {
+            "style": "full"
+          },
+          "style": "diamond",
+          "template": " \ue5ff {{ .Path }} ",
+          "trailing_diamond": "\ue0b0",
+          "type": "path"
+        },
+        {
+          "background": "#ff77a2",
+          "background_templates": [
+            "{{ if or (.Working.Changed) (.Staging.Changed) }}#f77622{{ end }}"
+          ],
+          "foreground": "#262b44",
+          "powerline_symbol": "\ue0b0",
+          "properties": {
+            "fetch_stash_count": false,
+            "fetch_status": false ,
+            "fetch_upstream_icon": false
+          },
+          "style": "powerline",
+          "template": " {{ .UpstreamIcon }}{{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }} ",
+          "type": "git"
+        }
+      ],
+      "type": "prompt"
+    }
+  ],
+  "final_space": true,
+  "version": 2
+}
