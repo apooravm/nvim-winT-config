@@ -1,50 +1,57 @@
--- Installing Packer with Bootstrapping funcs
--- Checks if packer installed
--- If not, installs it
-
-local ensure_packer = function()
-  local fn = vim.fn
-  local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
-  if fn.empty(fn.glob(install_path)) > 0 then
-    local git_installed = io.popen('where git'):read('*l')
-    if not git_installed then
-      print('Git is not installed. Please install Git.')
-      return false
-    end
-
-    local git_clone_command = string.format('git clone --depth 1 https://github.com/wbthomason/packer.nvim %s', install_path)
-    os.execute(git_clone_command)
-
-    vim.cmd [[packadd packer.nvim]]
-    return true
-  end
-  return false
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+	vim.fn.system({
+		"git",
+		"clone",
+		"--filter=blob:none",
+		"https://github.com/folke/lazy.nvim.git",
+		"--branch=stable", -- latest stable release
+		lazypath,
+	})
 end
+vim.opt.rtp:prepend(lazypath)
 
-local packer_bootstrap = ensure_packer()
+local plugins = {
+	-- Themes
+	{ "rose-pine/neovim", name = "rose-pine" },	
+	'navarasu/onedark.nvim',
+	'Mofiqul/vscode.nvim',
 
-return require('packer').startup(function(use)
-  use 'wbthomason/packer.nvim'
-  -- Your plugins here
-  -- use 'foo1/bar1.nvim'
-  -- use 'foo2/bar2.nvim'
-  use 'navarasu/onedark.nvim'
-  use 'Mofiqul/vscode.nvim'
-  use 'nvim-tree/nvim-tree.lua'
-  use 'nvim-tree/nvim-web-devicons'
-  use 'nvim-lualine/lualine.nvim'
-  use 'xiyaowong/transparent.nvim'
+	{
+		"nvim-tree/nvim-tree.lua",
+		version = "*",
+		lazy = false,
+		dependencies = {
+			"nvim-tree/nvim-web-devicons",
+		},
+		config = function()
+			require("nvim-tree").setup {}
+		end,
+	},
+	{
+		'nvim-lualine/lualine.nvim',
+		dependencies = { 'nvim-tree/nvim-web-devicons' }
+	},
 
-  use 'nvim-treesitter/nvim-treesitter'
-  use {
-	  'nvim-telescope/telescope.nvim',
-	  tag = '0.1.0',
-	  requires = { { 'nvim-lua/plenary.nvim' } }
-  }
+	-- 'xiyaowong/transparent.nvim',
 
-  -- Automatically set up your configuration after cloning packer.nvim
-  -- Put this at the end after all plugins
-  if packer_bootstrap then
-    require('packer').sync()
-  end
-end)
+	'nvim-treesitter/nvim-treesitter',
+	'nvim-treesitter/playground',
+	{
+		'nvim-telescope/telescope.nvim', tag = '0.1.5',
+		-- or                              , branch = '0.1.x',
+		dependencies = { 'nvim-lua/plenary.nvim' }
+	},
+	{'VonHeikemen/lsp-zero.nvim', branch = 'v3.x'},
+	{'neovim/nvim-lspconfig'},
+	{'hrsh7th/cmp-nvim-lsp'},
+	{'hrsh7th/nvim-cmp'},
+	{'L3MON4D3/LuaSnip'},
+	{"williamboman/mason.nvim"},
+	{"williamboman/mason-lspconfig.nvim"},
+}
+
+local opts = {}
+
+require("lazy").setup(plugins, opts)
+

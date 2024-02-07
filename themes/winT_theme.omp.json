@@ -4,7 +4,7 @@
     {
       "alignment": "left",
       "segments": [
-        {
+       {
           "background": "#bae61d",
           "foreground": "#262b44",
           "powerline_symbol": "\ue0b0",
@@ -32,6 +32,12 @@
           "template": " {{ .UpstreamIcon }}{{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }} ",
           "type": "git"
         }
+      ],
+      "type": "prompt"
+    },
+    {
+      "alignment": "right",
+      "segments": [
       ],
       "type": "prompt"
     }
