@@ -35,14 +35,14 @@ local plugins = {
 
 	-- 'xiyaowong/transparent.nvim',
 
-	{"nvim-treesitter/nvim-treesitter", build = ":TSUpdate"},
+	{"nvim-treesitter/nvim-treesitter", build = ":tsupdate"},
 	'nvim-treesitter/playground',
 	{
 		'nvim-telescope/telescope.nvim', tag = '0.1.5',
 		-- or                              , branch = '0.1.x',
 		dependencies = { 'nvim-lua/plenary.nvim' }
 	},
-	{'VonHeikemen/lsp-zero.nvim', branch = 'v3.x'},
+	{'vonheikemen/lsp-zero.nvim', branch = 'v3.x'},
 	{'neovim/nvim-lspconfig'},
 	{'hrsh7th/cmp-nvim-lsp'},
 	{'hrsh7th/nvim-cmp'},
@@ -58,7 +58,10 @@ local plugins = {
 			-- add any options here
 		},
 		lazy = false,
-	}
+	},
+
+	-- snippets
+	{ "hrsh7th/cmp-buffer" }
 }
 
 local opts = {}
