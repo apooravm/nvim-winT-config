@@ -1,19 +1,19 @@
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
-	vim.fn.system({
-		"git",
-		"clone",
-		"--filter=blob:none",
-		"https://github.com/folke/lazy.nvim.git",
-		"--branch=stable", -- latest stable release
-		lazypath,
-	})
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim" if not vim.loop.fs_stat(lazypath) then vim.fn.system({
+	"git",
+	"clone",
+	"--filter=blob:none",
+	"https://github.com/folke/lazy.nvim.git",
+	"--branch=stable", -- latest stable release
+	lazypath,
+})
 end
 vim.opt.rtp:prepend(lazypath)
 
 local plugins = {
 	-- Themes
-	{ "rose-pine/neovim", name = "rose-pine" },	
+	{ "catppuccin/nvim", name = "catppuccin", priority = 1000 },
+	{ "AxelGard/oneokai.nvim"},
+	{ "rose-pine/neovim", name = "rose-pine" },
 	'navarasu/onedark.nvim',
 	'Mofiqul/vscode.nvim',
 
@@ -35,7 +35,7 @@ local plugins = {
 
 	-- 'xiyaowong/transparent.nvim',
 
-	'nvim-treesitter/nvim-treesitter',
+	{"nvim-treesitter/nvim-treesitter", build = ":TSUpdate"},
 	'nvim-treesitter/playground',
 	{
 		'nvim-telescope/telescope.nvim', tag = '0.1.5',
@@ -46,9 +46,19 @@ local plugins = {
 	{'neovim/nvim-lspconfig'},
 	{'hrsh7th/cmp-nvim-lsp'},
 	{'hrsh7th/nvim-cmp'},
-	{'L3MON4D3/LuaSnip'},
+	{
+		"L3MON4D3/LuaSnip",
+		dependencies = { "rafamadriz/friendly-snippets" },
+	},
 	{"williamboman/mason.nvim"},
 	{"williamboman/mason-lspconfig.nvim"},
+	{
+		'numToStr/Comment.nvim',
+		opts = {
+			-- add any options here
+		},
+		lazy = false,
+	}
 }
 
 local opts = {}

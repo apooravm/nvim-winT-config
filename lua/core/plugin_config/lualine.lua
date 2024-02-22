@@ -10,10 +10,19 @@ end
 
 require('lualine').setup {
 	options = {
+		-- 
+		-- 
+		-- component_separators = { left = '', right = ''},
+		-- section_separators = { left = '', right = ''},
+		--
+		-- options = {
+		--   section_separators = { left = '', right = '' },
+		--   component_separators = { left = '', right = '' }
+		-- }
 		icons_enabled = true,
 		theme = custom_horizon,
-		component_separators = { left = '', right = ''},
-		section_separators = { left = '', right = ''},
+		component_separators = { left = '', right = '/'},
+		section_separators = { left = '', right = ''},
 		disabled_filetypes = {
 			statusline = {},
 			winbar = {},

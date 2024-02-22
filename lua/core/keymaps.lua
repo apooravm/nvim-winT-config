@@ -61,3 +61,7 @@ vim.keymap.set("n", "N", "Nzzzv")
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
 -- :%s/\(.\)
+
+--^ Remap CTRL-` to switch between files
+-- vim.api.nvim_set_keymap('n', '<C-^>', '<C-`>', { noremap = true, silent = true })
+

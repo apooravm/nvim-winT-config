@@ -7,15 +7,29 @@ require("core.plugin_config.nvim-tree")
 require("core.plugin_config.telescope")
 require("core.plugin_config.treesitter")
 require("core.plugin_config.lsp")
+require("core.plugin_config.comment")
+
+require("luasnip.loaders.from_vscode").lazy_load()
 
 require('onedark').setup {
 	--'dark', 'darker', 'cool', 'deep', 'warm', 'warmer', 'light' 
-    style = 'darker', 
+    style = 'darker',
 	transparent = true
 }
 
 require('onedark').load()
+-- require('oneokai').setup {
+--     style = 'darker'
+-- }
+-- require('oneokai').load()
 
+-- require("catppuccin").setup({
+-- 	flavour = "frappe",
+-- 	transparent_background = false
+-- })
+--
+-- vim.cmd.colorscheme "catppuccin"
+
+-- vim.cmd('TSEnable highlight')
 vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
 vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
-
