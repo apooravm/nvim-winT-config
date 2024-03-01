@@ -38,9 +38,9 @@ require('lualine').setup {
 	},
 	sections = {
     lualine_a = {'mode'},
-    lualine_b = {'branch'},
-    lualine_c = {{'filename', path=1}},
-    lualine_x = {'fileformat', 'filetype', { custom_time_component }},
+    lualine_b = {{'branch'}},
+    lualine_c = {{'filename', path=3}},
+    lualine_x = {'fileformat', { 'filetype', icon_only = true }, { custom_time_component }},
     lualine_y = {'progress'},
     lualine_z = {'location'}
   },

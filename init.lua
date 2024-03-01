@@ -34,3 +34,7 @@ require('onedark').load()
 -- vim.cmd('TSEnable highlight')
 vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
 vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+
+-- Experimental
+-- Select item from quickfix list window
+vim.api.nvim_set_keymap('n', 'cn<CR>', '<Leader>p', {noremap = true, silent = true})

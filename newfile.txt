@@ -13,7 +13,10 @@ VISUAL MODE
 `gb` - Toggles the region using blockwise comment
 
 Deleting/Change words under the cursor
+NORMAL MODE
 daw : delete the word under the cursor. Deletes the space around the word.
 diw : delete in word. Ignores the space around the word
 caw : delete the word under the cursor and put you in insert mode 
 
+INSERT MODE
+^W : delete the previous word in insert mode.
