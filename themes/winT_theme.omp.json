@@ -7,13 +7,13 @@
        {
           "background": "#bae61d",
           "foreground": "#262b44",
-          "powerline_symbol": "\ue0b0",
+          "powerline_symbol": "",
           "properties": {
             "style": "full"
           },
           "style": "diamond",
           "template": " \ue5ff {{ .Path }} ",
-          "trailing_diamond": "\ue0b0",
+          "trailing_diamond": "",
           "type": "path"
         },
         {
@@ -22,7 +22,7 @@
             "{{ if or (.Working.Changed) (.Staging.Changed) }}#f77622{{ end }}"
           ],
           "foreground": "#262b44",
-          "powerline_symbol": "\ue0b0",
+          "powerline_symbol": "",
           "properties": {
             "fetch_stash_count": false,
             "fetch_status": false ,
@@ -30,6 +30,7 @@
           },
           "style": "powerline",
           "template": " {{ .UpstreamIcon }}{{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }} ",
+					"trailing_diamond": "|",
           "type": "git"
         }
       ],

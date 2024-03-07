@@ -16,7 +16,16 @@ Deleting/Change words under the cursor
 NORMAL MODE
 daw : delete the word under the cursor. Deletes the space around the word.
 diw : delete in word. Ignores the space around the word
-caw : delete the word under the cursor and put you in insert mode 
+ciw : delete the word under the cursor and put you in insert mode 
+caw : delete the word under the cursor and the space infront of the word and put you in insert mode 
 
 INSERT MODE
 ^W : delete the previous word in insert mode.
+
+VISUAL MODE
+viw : select the word under the cursor
+vi[bracket/quote] : selects everything within/inside the brackets
+example: [a, b, c, c] 'vi[' selects a, b, c, d 
+or "some sequence of words" 'vi"' selects the text within
+
+
