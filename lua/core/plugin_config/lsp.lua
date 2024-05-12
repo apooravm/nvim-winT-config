@@ -17,15 +17,22 @@ lsp_zero.on_attach(function(client, bufnr)
 	-- vim.keymap.set("n", "<leader>vrn", function() vim.lsp.buf.rename() end, opts)
 	-- vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
 
-	lsp_zero.default_keymaps({buffer = bufnr})
+	-- lsp_zero.buffer_autoformat()
+	vim.api.nvim_create_autocmd("BufWritePre", {
+		pattern = "*",
+		callback = function(args)
+			require("conform").format({ bufnr = args.buf })
+		end,
+	})
+	lsp_zero.default_keymaps({ buffer = bufnr })
 end)
 
 -- here you can setup the language servers
 require('mason').setup({})
 require('mason-lspconfig').setup({
-	-- Replace the language servers listed here 
+	-- Replace the language servers listed here
 	-- with the ones you want to install
-	ensure_installed = {'tsserver', 'rust_analyzer', 'pylsp', 'clangd', 'gopls', 'eslint', 'svelte', 'lua_ls', 'tailwindcss'},
+	ensure_installed = { 'tsserver', 'rust_analyzer', 'pylsp', 'clangd', 'gopls', 'eslint', 'svelte', 'lua_ls', 'tailwindcss' },
 	handlers = {
 		lsp_zero.default_setup,
 	},
