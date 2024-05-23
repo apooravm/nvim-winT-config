@@ -7,12 +7,12 @@ telescope.setup({
 			"node_modules/.*",
 			".git/.*",
 		},
-		finder_command = { "--no-ignore", "!.git" },
-		no_ignore = true,
+		-- finder_command = { "--no-ignore", "!.git" },
+		-- no_ignore = true,
 	},
-	additional_args = function(args)
-		return vim.list_extend(args, { "--hidden", "--no-ignore" })
-	end,
+	-- additional_args = function(args)
+	-- 	return vim.list_extend(args, { "--hidden", "--no-ignore" })
+	-- end,
 })
 
 -- Both '<Leader>pf' and 'Enter Key' will bring up the find_files menu

@@ -3,7 +3,7 @@ vim.g.loaded_netrwPlugin = 1
 
 require("nvim-tree").setup({
 	view = {
-		width = 25
+		width = 25,
 	},
 	hijack_cursor = false,
 	renderer = {
@@ -11,7 +11,10 @@ require("nvim-tree").setup({
 			enable = true,
 		},
 	},
+	git = {
+		ignore = false,
+	},
 })
 
-vim.keymap.set('n', '<c-n>', ':NvimTreeFindFileToggle<CR>')
-vim.keymap.set('n', '<c-m>', ':NvimTreeFocus<CR>')
+vim.keymap.set("n", "<c-n>", ":NvimTreeFindFileToggle<CR>")
+vim.keymap.set("n", "<c-m>", ":NvimTreeFocus<CR>")
