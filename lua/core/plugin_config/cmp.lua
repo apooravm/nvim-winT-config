@@ -5,6 +5,34 @@ local lspkind = require("lspkind")
 
 require("luasnip.loaders.from_vscode").lazy_load()
 
+local cmp_kinds = {
+	Text = "  ",
+	Method = "  ",
+	Function = "  ",
+	Constructor = "  ",
+	Field = "  ",
+	Variable = "  ",
+	Class = "  ",
+	Interface = "  ",
+	Module = "  ",
+	Property = "  ",
+	Unit = "  ",
+	Value = "  ",
+	Enum = "  ",
+	Keyword = "  ",
+	Snippet = "  ",
+	Color = "  ",
+	File = "  ",
+	Reference = "  ",
+	Folder = "  ",
+	EnumMember = "  ",
+	Constant = "  ",
+	Struct = "  ",
+	Event = "  ",
+	Operator = "  ",
+	TypeParameter = "  ",
+}
+
 local formatForTailwindCSS = function(entry, vim_item) -- for tailwindcss autocomplete
 	if vim_item.kind == "Color" and entry.completion_item.documentation then
 		local _, _, r, g, b = string.find(entry.completion_item.documentation, "^rgb%((%d+), (%d+), (%d+)")
@@ -46,13 +74,22 @@ cmp.setup({
 	},
 	--- (Optional) Show source name in completion menu
 	-- formatting = cmp_format,
+	-- https://github.com/hrsh7th/nvim-cmp/wiki/Menu-Appearance#how-to-get-types-on-the-left-and-offset-the-menu
+	-- https://www.reddit.com/r/neovim/comments/191eg59/how_to_achieve_cmp_ui_like_nvchad/
 	formatting = {
-		fields = { "abbr", "kind", "menu" },
+		fields = { "kind", "abbr", "menu" },
 		format = lspkind.cmp_format({
-			mode = "symbol_text", -- options: 'text', 'text_symbol', 'symbol_text', 'symbol'
+			mode = "text_symbol", -- options: 'text', 'text_symbol', 'symbol_text', 'symbol'
 			maxwidth = 50, -- prevent the popup from showing more than provided characters
 			ellipsis_char = "...",
 			show_labelDetails = true,
+			-- menu = {
+			-- 	buffer = "[Buffer]",
+			-- 	nvim_lsp = "[LSP]",
+			-- 	luasnip = "[LuaSnip]",
+			-- 	nvim_lua = "[Lua]",
+			-- 	latex_symbols = "[Latex]",
+			-- },
 			before = function(entry, vim_item)
 				-- vim_item = formatForTailwindCSS(entry, vim_item) -- for tailwind css autocomplete
 				-- local kind = require("lspkind").cmp_format({ mode = "symbol_text", maxwidth = 50 })(entry, vim_item)
@@ -78,11 +115,11 @@ cmp.setup({
 		-- documentation = cmp.config.window.bordered(),
 		completion = cmp.config.window.bordered({
 			col_offset = 0, -- align the abbr and word on cursor (due to fields order below)
-			side_padding = 2,
+			side_padding = 1,
 		}),
 		documentation = cmp.config.window.bordered({
 			-- winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,CursorLine:PmenuSel,Search:None",
-			border = "rounded",
+			-- border = "rounded",
 		}),
 	},
 	-- window = {

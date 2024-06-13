@@ -16,6 +16,7 @@ require("onedark").setup({
 	--'dark', 'darker', 'cool', 'deep', 'warm', 'warmer', 'light'
 	style = "darker",
 	transparent = true,
+	-- cmp_itemkind_reverse = true,
 })
 
 require("onedark").load()
