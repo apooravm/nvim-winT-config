@@ -12,13 +12,13 @@ require("core.plugin_config.init")
 
 -- require("luasnip.loaders.from_vscode").lazy_load({ include = { "python" } })
 
-require('onedark').setup {
-	--'dark', 'darker', 'cool', 'deep', 'warm', 'warmer', 'light' 
-    style = 'darker',
-	transparent = true
-}
+require("onedark").setup({
+	--'dark', 'darker', 'cool', 'deep', 'warm', 'warmer', 'light'
+	style = "darker",
+	transparent = true,
+})
 
-require('onedark').load()
+require("onedark").load()
 -- require('oneokai').setup {
 --     style = 'darker'
 -- }
@@ -34,7 +34,10 @@ require('onedark').load()
 -- vim.cmd('TSEnable highlight')
 vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
 vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+-- removes those border colouring
+-- https://www.reddit.com/r/neovim/comments/18faftd/cmp_border_background_is_changed_all_of_a_sudden/
+vim.api.nvim_set_hl(0, "FloatBorder", { link = "Normal" })
 
 -- Experimental
 -- Select item from quickfix list window
-vim.api.nvim_set_keymap('n', 'cn<CR>', '<Leader>p', {noremap = true, silent = true})
+vim.api.nvim_set_keymap("n", "cn<CR>", "<Leader>p", { noremap = true, silent = true })

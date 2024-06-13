@@ -13,11 +13,11 @@ vim.opt.rtp:prepend(lazypath)
 
 local plugins = {
 	-- Themes
-	{ "catppuccin/nvim",      name = "catppuccin", priority = 1000 },
+	{ "catppuccin/nvim", name = "catppuccin", priority = 1000 },
 	{ "AxelGard/oneokai.nvim" },
-	{ "rose-pine/neovim",     name = "rose-pine" },
-	'navarasu/onedark.nvim',
-	'Mofiqul/vscode.nvim',
+	{ "rose-pine/neovim", name = "rose-pine" },
+	"navarasu/onedark.nvim",
+	"Mofiqul/vscode.nvim",
 
 	{
 		"nvim-tree/nvim-tree.lua",
@@ -27,28 +27,29 @@ local plugins = {
 			"nvim-tree/nvim-web-devicons",
 		},
 		config = function()
-			require("nvim-tree").setup {}
+			require("nvim-tree").setup({})
 		end,
 	},
 	{
-		'nvim-lualine/lualine.nvim',
-		dependencies = { 'nvim-tree/nvim-web-devicons' }
+		"nvim-lualine/lualine.nvim",
+		dependencies = { "nvim-tree/nvim-web-devicons" },
 	},
 
 	-- 'xiyaowong/transparent.nvim',
 
 	{ "nvim-treesitter/nvim-treesitter", build = ":tsupdate" },
-	'nvim-treesitter/playground',
+	"nvim-treesitter/playground",
 	{
-		'nvim-telescope/telescope.nvim',
-		tag = '0.1.5',
+		"nvim-telescope/telescope.nvim",
+		tag = "0.1.5",
 		-- or                              , branch = '0.1.x',
-		dependencies = { 'nvim-lua/plenary.nvim' }
+		dependencies = { "nvim-lua/plenary.nvim" },
 	},
-	{ 'vonheikemen/lsp-zero.nvim',       branch = 'v3.x' },
-	{ 'neovim/nvim-lspconfig' },
-	{ 'hrsh7th/cmp-nvim-lsp' },
-	{ 'hrsh7th/nvim-cmp' },
+	{ "vonheikemen/lsp-zero.nvim", branch = "v3.x" },
+	{ "neovim/nvim-lspconfig" },
+	{ "hrsh7th/cmp-nvim-lsp" },
+	{ "hrsh7th/nvim-cmp" },
+	-- Snippets
 	{
 		"L3MON4D3/LuaSnip",
 		dependencies = { "rafamadriz/friendly-snippets" },
@@ -56,18 +57,20 @@ local plugins = {
 	{ "williamboman/mason.nvim" },
 	{ "williamboman/mason-lspconfig.nvim" },
 	{
-		'numToStr/Comment.nvim',
+		"numToStr/Comment.nvim",
 		opts = {
 			-- add any options here
 		},
 		lazy = false,
 	},
 	{
-		'stevearc/conform.nvim',
+		"stevearc/conform.nvim",
 		opts = {},
 	},
 	-- snippets
-	{ "hrsh7th/cmp-buffer" }
+	{ "hrsh7th/cmp-buffer" },
+	-- vscode like pictograms for funcs, modules, etc.
+	{ "onsails/lspkind.nvim" },
 }
 
 local opts = {}
