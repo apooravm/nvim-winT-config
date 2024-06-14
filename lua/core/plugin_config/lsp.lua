@@ -14,6 +14,8 @@ lsp_zero.on_attach(function(client, bufnr)
 	-- local opts = {buffer = bufnr, remap = false}
 	--
 	-- vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
+	-- https://lsp-zero.netlify.app/v3.x/reference/lua-api.html#lsp-actions
+	-- https://lsp-zero.netlify.app/v3.x/reference/lua-api.html#lsp-actions
 	vim.keymap.set("i", "<C>k", function()
 		vim.lsp.buf.hover()
 	end, opts)
@@ -25,6 +27,15 @@ lsp_zero.on_attach(function(client, bufnr)
 	-- vim.keymap.set("n", "<leader>vrr", function() vim.lsp.buf.references() end, opts)
 	-- vim.keymap.set("n", "<leader>vrn", function() vim.lsp.buf.rename() end, opts)
 	-- vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
+
+	-- format code on keypress
+	vim.keymap.set("n", "<leader>]", function()
+		vim.lsp.buf.format()
+	end, opts)
+
+	vim.keymap.set("n", "<leader>\\", function()
+		vim.lsp.buf.code_action()
+	end, opts)
 
 	-- lsp_zero.buffer_autoformat()
 	vim.api.nvim_create_autocmd("BufWritePre", {
