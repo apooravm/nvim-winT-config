@@ -62,6 +62,11 @@ vim.keymap.set("n", "N", "Nzzzv")
 -- space + s on some word selects same words in the file and allows to edit them
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
+-- Enable word line wrapping. Whole word gets moved to next line instead of characters
+-- :set linebreak
+vim.opt.wrap = true
+vim.opt.linebreak = true
+
 -- :%s/\(.\)
 
 --^ Remap CTRL-` to switch between files
