@@ -6,8 +6,8 @@ require("statuscol").setup({
 	-- mine - sign -> fold -> line num + separator
 	segments = {
 		{ text = { "%s" }, click = "v:lua.ScSa" },
-		{ text = { builtin.foldfunc }, click = "v:lua.ScFa", colwidth = 2 },
 		-- " " is the separator
-		{ text = { builtin.lnumfunc, " " }, click = "v:lua.ScLa" },
+		{ text = { builtin.lnumfunc }, click = "v:lua.ScLa" },
+		{ text = { builtin.foldfunc, " " }, click = "v:lua.ScFa" },
 	},
 })
