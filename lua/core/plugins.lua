@@ -74,6 +74,12 @@ local plugins = {
 	{ "hrsh7th/cmp-buffer" },
 	-- vscode like pictograms for funcs, modules, etc.
 	{ "onsails/lspkind.nvim" },
+
+	-- For folding stuff
+	{
+		"kevinhwang91/nvim-ufo",
+		dependencies = { "kevinhwang91/promise-async" },
+	},
 }
 
 local opts = {}

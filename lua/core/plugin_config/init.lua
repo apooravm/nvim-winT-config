@@ -7,4 +7,4 @@ require("core.plugin_config.lsp")
 require("core.plugin_config.comment")
 require("core.plugin_config.cmp")
 require("core.plugin_config.conform")
-
+require("core.plugin_config.nvim-ufo")

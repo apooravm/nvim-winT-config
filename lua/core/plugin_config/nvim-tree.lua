@@ -14,7 +14,13 @@ require("nvim-tree").setup({
 	git = {
 		ignore = false,
 	},
+
+	actions = {
+		open_file = {
+			quit_on_open = true,
+		},
+	},
 })
 
 vim.keymap.set("n", "<c-n>", ":NvimTreeFindFileToggle<CR>")
-vim.keymap.set("n", "<c-m>", ":NvimTreeFocus<CR>")
+vim.keymap.set("n", "<c-b>", ":NvimTreeFocus<CR>")

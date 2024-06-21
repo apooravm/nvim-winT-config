@@ -33,6 +33,7 @@ lsp_zero.on_attach(function(client, bufnr)
 		vim.lsp.buf.format()
 	end, opts)
 
+	-- Trigger suggested code actions. Like import something or change type etc.
 	vim.keymap.set("n", "<leader>\\", function()
 		vim.lsp.buf.code_action()
 	end, opts)
