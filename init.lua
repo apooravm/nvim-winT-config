@@ -33,8 +33,10 @@ require("onedark").load()
 -- vim.cmd.colorscheme "catppuccin"
 
 -- vim.cmd('TSEnable highlight')
+-- Transparent baackground
 vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
 vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+
 -- removes those border colouring
 -- https://www.reddit.com/r/neovim/comments/18faftd/cmp_border_background_is_changed_all_of_a_sudden/
 vim.api.nvim_set_hl(0, "FloatBorder", { link = "Normal" })
