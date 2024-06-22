@@ -20,6 +20,9 @@ require("nvim-tree").setup({
 			quit_on_open = true,
 		},
 	},
+	diagnostics = {
+		enable = true,
+	},
 })
 
 vim.keymap.set("n", "<c-n>", ":NvimTreeFindFileToggle<CR>")
