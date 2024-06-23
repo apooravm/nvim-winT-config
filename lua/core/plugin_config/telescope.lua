@@ -3,14 +3,28 @@ local telescope = require("telescope")
 
 telescope.setup({
 	defaults = {
+		mappings = {
+			n = {
+				["<C-j>"] = require("telescope.actions").move_selection_next,
+				["<C-k>"] = require("telescope.actions").move_selection_previous,
+			},
+		},
 		file_ignore_patterns = {
 			"node_modules/.*",
 			".git/.*",
 			"vendor/.*",
 		},
+		layout_strategy = "vertical",
+		layout_config = { height = 0.95, width = 0.6 },
 		-- finder_command = { "--no-ignore", "!.git" },
 		-- no_ignore = true,
 	},
+	pickers = {
+		find_files = {
+			-- theme = "dropdown",
+		},
+	},
+
 	-- additional_args = function(args)
 	-- 	return vim.list_extend(args, { "--hidden", "--no-ignore" })
 	-- end,
