@@ -15,13 +15,18 @@ vim.o.softtabstop = 4
 vim.opt.hlsearch = true
 vim.opt.incsearch = true
 
--- when scrolling with cursor, always has 8lines. Cursor doesnt hug the start/end
-vim.opt.scrolloff = 8
+vim.opt.scrolloff = 8 -- when scrolling with cursor, always has 8lines. Cursor doesnt hug the start/end
+
+-- sets a title at the top
+-- vim.opt.title = true
 
 vim.opt.updatetime = 50
 
--- Enable mouse support
-vim.o.mouse = "a"
+vim.o.mouse = "a" -- Enable mouse support
+
+-- Searching in current file
+vim.opt.ignorecase = true
+vim.opt.smartcase = true -- Make it case sensitive if the first char is capital
 
 -- Other
 vim.opt.showcmd = true
@@ -66,6 +71,19 @@ vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><
 -- :set linebreak
 vim.opt.wrap = true
 vim.opt.linebreak = true
+
+vim.opt.cursorline = true
+vim.opt.cursorlineopt = 'number' -- Highlight only the current line number
+
+-- Automatically close brackets, parentheses, and quotes
+-- local opts = { noremap = true, silent = true }
+
+-- vim.api.nvim_set_keymap('i', '"', '""<left>', opts)
+-- vim.api.nvim_set_keymap('i', '\'', '\'\'<left>', opts)
+-- vim.api.nvim_set_keymap('i', '(', '()<left>', opts)
+-- vim.api.nvim_set_keymap('i', '[', '[]<left>', opts)
+-- vim.api.nvim_set_keymap('i', '{', '{}<left><left>', opts)
+-- vim.api.nvim_set_keymap('i', '/*', '/**/<left><left>', opts)
 
 -- :%s/\(.\)
 
