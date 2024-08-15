@@ -16,6 +16,10 @@ require("onedark").setup({
 	--'dark', 'darker', 'cool', 'deep', 'warm', 'warmer', 'light'
 	style = "darker",
 	transparent = true,
+	highlights = {
+		['CursorLineNr'] = { fg = '#ff77a2' },
+	},
+
 	-- cmp_itemkind_reverse = true,
 })
 
