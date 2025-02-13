@@ -1,5 +1,5 @@
-require 'nvim-treesitter.configs'.setup {
-	ensure_installed = {"c", "lua", "rust", "vim", "python", "go", "javascript", "typescript", "svelte"},
+require("nvim-treesitter.configs").setup({
+	ensure_installed = { "c", "lua", "rust", "vim", "python", "go", "javascript", "typescript", "svelte" },
 
 	-- Install Parsers synchronously
 	sync_install = false,
@@ -13,5 +13,5 @@ require 'nvim-treesitter.configs'.setup {
 		additional_vim_regex_highlighting = false,
 	},
 	-- Auto indent when moving to the next line. Say pressing 'o' moves you down a line and auto indents as well
-	indent = { enable = true, disable = { "yaml" } }
-}
+	indent = { enable = true, disable = { "yaml", "go" } },
+})
