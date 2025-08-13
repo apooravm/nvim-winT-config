@@ -13,9 +13,9 @@ vim.opt.rtp:prepend(lazypath)
 
 local plugins = {
 	-- Themes
-	{ "catppuccin/nvim",      name = "catppuccin", priority = 1000 },
+	{ "catppuccin/nvim", name = "catppuccin", priority = 1000 },
 	{ "AxelGard/oneokai.nvim" },
-	{ "rose-pine/neovim",     name = "rose-pine" },
+	{ "rose-pine/neovim", name = "rose-pine" },
 	"navarasu/onedark.nvim",
 	"Mofiqul/vscode.nvim",
 
@@ -45,7 +45,7 @@ local plugins = {
 		-- or                              , branch = '0.1.x',
 		dependencies = { "nvim-lua/plenary.nvim" },
 	},
-	{ "vonheikemen/lsp-zero.nvim",       branch = "v3.x" },
+	{ "vonheikemen/lsp-zero.nvim", branch = "v3.x" },
 	{ "neovim/nvim-lspconfig" },
 	{ "hrsh7th/cmp-nvim-lsp" },
 	{ "hrsh7th/nvim-cmp" },
@@ -85,7 +85,22 @@ local plugins = {
 	},
 
 	-- vim dev. Gets rid of those annoying warnings anytime I am editing the config
-	{ "folke/neodev.nvim", opts = {} }
+	{ "folke/neodev.nvim", opts = {} },
+
+	-- Temp
+	-- working with R in quarto (applied analytics assignment)
+	{
+		"quarto-dev/quarto-nvim",
+		dependencies = {
+			"jmbuhr/otter.nvim",
+			"nvim-treesitter/nvim-treesitter",
+		},
+	},
+
+	-- Minimap
+	-- {
+	-- 	"gorbit99/codewindow.nvim",
+	-- },
 }
 
 local opts = {}

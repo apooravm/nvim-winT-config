@@ -17,7 +17,7 @@ require("onedark").setup({
 	style = "darker",
 	transparent = true,
 	highlights = {
-		['CursorLineNr'] = { fg = '#ff77a2' },
+		["CursorLineNr"] = { fg = "#ff77a2" },
 	},
 
 	-- cmp_itemkind_reverse = true,

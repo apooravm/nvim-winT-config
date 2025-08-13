@@ -49,12 +49,18 @@ lsp_zero.on_attach(function(client, bufnr)
 end)
 
 -- here you can setup the language servers
+-- mason => package manager for nvim
+-- mason-lspconfig => extension to mason.nvim, makes it easier to use lspconfig with mason.nvim
 require("mason").setup({})
 require("mason-lspconfig").setup({
 	ensure_installed = {
-		"tsserver",
+		-- tsserver name changed to ts_ls
+		-- Reason for "tsserver not a valid entry in ensure_installed" error
+		"ts_ls",
 		"rust_analyzer",
-		"pylsp",
+		-- "pylsp",
+		-- "ruff",
+		"pyright",
 		"clangd",
 		"gopls",
 		"eslint",
@@ -66,3 +72,19 @@ require("mason-lspconfig").setup({
 		lsp_zero.default_setup,
 	},
 })
+
+-- refer
+-- https://docs.astral.sh/ruff/editors/setup/#neovim
+-- disabling formatting via pyright to allow through ruff
+-- require("lspconfig").pyright.setup({
+-- 	settings = {
+-- 		pyright = {
+-- 			disableOrganizeImports = true,
+-- 		},
+-- 		python = {
+-- 			analysis = {
+-- 				ignore = { "*" },
+-- 			},
+-- 		},
+-- 	},
+-- })
