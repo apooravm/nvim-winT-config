@@ -41,9 +41,9 @@ local plugins = {
 	"nvim-treesitter/playground",
 	{
 		"nvim-telescope/telescope.nvim",
-		tag = "0.1.5",
+		tag = "0.1.8",
 		-- or                              , branch = '0.1.x',
-		dependencies = { "nvim-lua/plenary.nvim" },
+		dependencies = { "nvim-lua/plenary.nvim", "BurntSushi/ripgrep" },
 	},
 	{ "vonheikemen/lsp-zero.nvim", branch = "v3.x" },
 	{ "neovim/nvim-lspconfig" },
@@ -95,6 +95,11 @@ local plugins = {
 			"jmbuhr/otter.nvim",
 			"nvim-treesitter/nvim-treesitter",
 		},
+	},
+
+	-- Supermaven copilot code completion
+	{
+		"supermaven-inc/supermaven-nvim",
 	},
 
 	-- Minimap

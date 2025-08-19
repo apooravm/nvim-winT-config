@@ -9,4 +9,5 @@ require("core.plugin_config.cmp")
 require("core.plugin_config.conform")
 require("core.plugin_config.nvim-ufo")
 require("core.plugin_config.statuscol")
+-- require("core.plugin_config.supermaven")
 -- require("core.plugin_config.quarto") Dont need anymore, for a single module in blair class lmao
