@@ -59,6 +59,10 @@ echo "Cloning neovim config"
 mkdir ~/.config/nvim
 git clone $NVIM_CONFIG ~/.config/nvim/
 
+# autosuggestions for zsh-autosuggestions
+# update plugin array in ~/.zshrc by adding zsh-autosuggestions
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+
 # /bin/zsh
 
 # echo "Verifying installations..."
