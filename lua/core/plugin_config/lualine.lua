@@ -41,8 +41,16 @@ require("lualine").setup({
 		-- color={bg='#ff77a2', fg='#0f121c'},
 		-- lualine_b = {{'branch', color={bg='#ff77a2', fg='#0f121c'}, separator={left='\\', right=''}}},
 		lualine_b = { { "branch", separator = { left = "\\", right = "" } } },
-		lualine_c = { { "filename", path = 3 } },
-		lualine_x = { "fileformat", { "filetype", icon_only = true }, { custom_time_component } },
+		lualine_c = {
+			{ "filename", path = 4 },
+			{
+				"lsp_status",
+				symbols = {
+					spinner = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" },
+				},
+			},
+		},
+		lualine_x = { "diagnostics", "diff", { "filetype", icon_only = true }, { custom_time_component } },
 		lualine_y = { "progress" },
 		lualine_z = { "location" },
 	},
