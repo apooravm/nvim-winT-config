@@ -1,154 +1,167 @@
--- https://lsp-zero.netlify.app/v3.x/autocomplete.html
--- Responsible for autocompletion
+-- removed the need for lspkind or any icon packs
+-- changed the formatter func in cmp
+-- added squared corners
 
 local cmp = require("cmp")
-local cmp_format = require("lsp-zero").cmp_format()
-local cmp_action = require("lsp-zero").cmp_action()
-local lspkind = require("lspkind")
+local luasnip = require("luasnip")
 
--- require('luasnip.loaders.from_vscode').lazy_load()
--- require("luasnip.loaders.from_vscode").load {}
-require("luasnip/loaders/from_vscode").lazy_load()
-
-local cmp_kinds = {
-	Text = "  ",
-	Method = "  ",
-	Function = "  ",
-	Constructor = "  ",
-	Field = "  ",
-	Variable = "  ",
-	Class = "  ",
-	Interface = "  ",
-	Module = "  ",
-	Property = "  ",
-	Unit = "  ",
-	Value = "  ",
-	Enum = "  ",
-	Keyword = "  ",
-	Snippet = "  ",
-	Color = "  ",
-	File = "  ",
-	Reference = "  ",
-	Folder = "  ",
-	EnumMember = "  ",
-	Constant = "  ",
-	Struct = "  ",
-	Event = "  ",
-	Operator = "  ",
-	TypeParameter = "  ",
+local mini_icons_pack = {
+	Text = { glyph = "" },
+	Method = { glyph = "" },
+	Function = { glyph = "" },
+	Constructor = { glyph = "" },
+	Field = { glyph = "" },
+	Variable = { glyph = "" },
+	Class = { glyph = "" },
+	Interface = { glyph = "" },
+	Module = { glyph = "" },
+	Property = { glyph = "" },
+	Unit = { glyph = "" },
+	Value = { glyph = "" },
+	Enum = { glyph = "" },
+	Keyword = { glyph = "" },
+	Snippet = { glyph = "" },
+	Color = { glyph = "" },
+	File = { glyph = "" },
+	Reference = { glyph = "" },
+	Folder = { glyph = "" },
+	EnumMember = { glyph = "" },
+	Constant = { glyph = "" },
+	Struct = { glyph = "" },
+	Event = { glyph = "" },
+	Operator = { glyph = "" },
+	TypeParameter = { glyph = "" },
 }
 
--- https://www.reddit.com/r/neovim/comments/12l2fw6/sharing_my_neovim_config_the_product_of_countless/
--- https://www.reddit.com/r/neovim/comments/103zetf/how_can_i_get_a_vscodelike_tailwind_css/
-local formatForTailwindCSS = function(entry, vim_item) -- for tailwindcss autocomplete
-	if vim_item.kind == "Color" and entry.completion_item.documentation then
-		local _, _, r, g, b = string.find(entry.completion_item.documentation, "^rgb%((%d+), (%d+), (%d+)")
+local vscode_symbol_map = {
+	Text = "󰉿",
+	Method = "󰆧",
+	Function = "󰊕",
+	Constructor = "",
+	Field = "󰜢",
+	Variable = "󰀫",
+	Class = "󰠱",
+	Interface = "",
+	Module = "",
+	Property = "󰜢",
+	Unit = "󰑭",
+	Value = "󰎠",
+	Enum = "",
+	Keyword = "󰌋",
+	Snippet = "",
+	Color = "󰏘",
+	File = "󰈙",
+	Reference = "󰈇",
+	Folder = "󰉋",
+	EnumMember = "",
+	Constant = "󰏿",
+	Struct = "󰙅",
+	Event = "",
+	Operator = "󰆕",
+	TypeParameter = "",
+}
+
+-- Load vscode-style snippets lazily
+require("luasnip.loaders.from_vscode").lazy_load()
+
+-- TailwindCSS color formatting
+local function format_tailwind(entry, item)
+	if item.kind == "Color" and entry.completion_item.documentation then
+		local _, _, r, g, b = entry.completion_item.documentation:find("^rgb%((%d+), (%d+), (%d+)")
 		if r then
-			local colour = string.format("%02x", r) .. string.format("%02x", g) .. string.format("%02x", b)
-			local group = "Tw_" .. colour
+			local hex = string.format("%02x%02x%02x", r, g, b)
+			local group = "Tw_" .. hex
+
 			if vim.fn.hlID(group) < 1 then
-				vim.api.nvim_set_hl(0, group, { fg = "#" .. colour })
+				vim.api.nvim_set_hl(0, group, { fg = "#" .. hex })
 			end
-			vim_item.kind = "⬤" -- or "⬤" or "■" or anything
-			vim_item.kind_hl_group = group
-			return vim_item
+
+			item.kind = "⬤"
+			item.kind_hl_group = group
 		end
 	end
-	vim_item.kind = lspkind.symbolic(vim_item.kind) and lspkind.symbolic(vim_item.kind) or vim_item.kind
-	return vim_item
+	return item
+end
+
+local maxwidth = 30
+local ellipsis_char = "..."
+
+local function truncate(str, width)
+	if #str > width then
+		return str:sub(1, width - #ellipsis_char) .. ellipsis_char
+	end
+	return str
+end
+
+local function cmp_formatter(entry, item)
+	-- 1️⃣ Add icon in text_symbol mode (kind + glyph)
+	local icon = vscode_symbol_map[item.kind]
+	if icon then
+		item.kind = icon .. " "
+	else
+		item.kind = " " -- fallback empty space
+	end
+
+	-- 2️⃣ Truncate the completion text if too long
+	item.abbr = truncate(item.abbr, maxwidth)
+
+	-- 3️⃣ Add menu label (source)
+	item.menu = "[" .. entry.source.name .. "]"
+
+	-- 4️⃣ Optional: Tailwind CSS colors (keep your existing function)
+	if item.kind:find("Color") then
+		item = format_tailwind(entry, item)
+	end
+
+	return item
 end
 
 cmp.setup({
-	-- Preselect the first item in the completion menu
-	preselect = "item",
+	preselect = cmp.PreselectMode.Item,
+
 	completion = {
 		completeopt = "menu,menuone,noinsert",
-
-		-- trigger the completion menu automatically
-		-- autocomplete = false,
 	},
+
+	snippet = {
+		expand = function(args)
+			luasnip.lsp_expand(args.body)
+		end,
+	},
+
 	mapping = cmp.mapping.preset.insert({
-		-- Press enter to confirm completion
 		["<CR>"] = cmp.mapping.confirm({ select = true }),
-		-- Supertab https://lsp-zero.netlify.app/v3.x/autocomplete.html#enable-super-tab
-		-- Tab will trigger completion menu. If menu open, tab will navigate to the next item
-		-- ["<Tab>"] = cmp_action.luasnip_supertab(),
-		-- ["<S-Tab>"] = cmp_action.luasnip_shift_supertab(),
-		["<Tab>"] = cmp_action.tab_complete(),
-		["<S-Tab>"] = cmp_action.select_prev_or_fallback(),
+		["<Tab>"] = cmp.mapping.select_next_item(),
+		["<S-Tab>"] = cmp.mapping.select_prev_item(),
 
 		["<C-d>"] = cmp.mapping.scroll_docs(4),
 		["<C-u>"] = cmp.mapping.scroll_docs(-4),
-		["<C-Space>"] = cmp.mapping.complete(), -- show completion suggestions. <C-Space> not work in windows terminal
+		["<C-Space>"] = cmp.mapping.complete(),
 	}),
+
 	sources = {
 		{ name = "nvim_lsp" },
-		{ name = "buffer" },
 		{ name = "luasnip" },
+		{ name = "buffer" },
 		{ name = "nvim_lua" },
 	},
-	snippet = {
-		expand = function(args)
-			require("luasnip").lsp_expand(args.body)
-		end,
-	},
-	--- (Optional) Show source name in completion menu
-	-- formatting = cmp_format,
-	-- https://github.com/hrsh7th/nvim-cmp/wiki/Menu-Appearance#how-to-get-types-on-the-left-and-offset-the-menu
-	-- https://www.reddit.com/r/neovim/comments/191eg59/how_to_achieve_cmp_ui_like_nvchad/
+
 	formatting = {
 		fields = { "kind", "abbr", "menu" },
-		format = lspkind.cmp_format({
-			mode = "text_symbol", -- options: 'text', 'text_symbol', 'symbol_text', 'symbol'
-			maxwidth = 50, -- prevent the popup from showing more than provided characters
-			ellipsis_char = "...", -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead
-			show_labelDetails = true,
-			-- menu = {
-			-- 	buffer = "[Buffer]",
-			-- 	nvim_lsp = "[LSP]",
-			-- 	luasnip = "[LuaSnip]",
-			-- 	nvim_lua = "[Lua]",
-			-- 	latex_symbols = "[Latex]",
-			-- },
-			before = function(entry, vim_item)
-				-- vim_item = formatForTailwindCSS(entry, vim_item) -- for tailwind css autocomplete
-				-- local kind = require("lspkind").cmp_format({ mode = "symbol_text", maxwidth = 50 })(entry, vim_item)
-				-- local strings = vim.split(kind.kind, "%s", { trimempty = true })
-				-- kind.kind = " " .. (strings[1] or "") .. " "
-				-- kind.menu = "    (" .. (strings[2] or "") .. ")"
-				--
-				-- return kind
-				vim_item.menu = "[" .. vim_item.kind .. "]"
-				vim_item.dup = ({
-					nvim_lsp = 0,
-					path = 0,
-				})[entry.source.name] or 0
-				vim_item = formatForTailwindCSS(entry, vim_item) -- for tailwind css autocomplete
-				return vim_item
-			end,
-		}),
+		format = cmp_formatter,
 	},
 
-	-- adds borders to the completion menu
 	window = {
-		-- completion = cmp.config.window.bordered(),
-		-- documentation = cmp.config.window.bordered(),
 		completion = cmp.config.window.bordered({
-			col_offset = 0, -- align the abbr and word on cursor (due to fields order below)
+			col_offset = 0,
 			side_padding = 1,
+			-- topleft, top, topright, right, bottomright, bottom, bottomleft, left
+			border = { "┌", "─", "┐", "│", "┘", "─", "└", "│" },
 		}),
 		documentation = cmp.config.window.bordered({
-			-- winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,CursorLine:PmenuSel,Search:None",
-			-- border = "rounded",
+			border = { "┌", "─", "┐", "│", "┘", "─", "└", "│" },
 		}),
 	},
-	-- window = {
-	-- 	completion = {
-	-- 		winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
-	-- 		col_offset = -3,
-	-- 		side_padding = 0,
-	-- 	},
-	-- },
 })
 
 vim.opt.pumblend = 0

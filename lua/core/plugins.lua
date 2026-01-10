@@ -45,9 +45,7 @@ local plugins = {
 		-- or                              , branch = '0.1.x',
 		dependencies = { "nvim-lua/plenary.nvim", "BurntSushi/ripgrep" },
 	},
-	{ "vonheikemen/lsp-zero.nvim", branch = "v3.x" },
-	{ "neovim/nvim-lspconfig" },
-	{ "hrsh7th/cmp-nvim-lsp" },
+	{ "neovim/nvim-lspconfig", lazy = { false } },
 	{ "hrsh7th/nvim-cmp" },
 
 	-- Snippets
@@ -58,7 +56,6 @@ local plugins = {
 	{ "saadparwaiz1/cmp_luasnip" },
 
 	{ "williamboman/mason.nvim" },
-	{ "williamboman/mason-lspconfig.nvim" },
 	{
 		"numToStr/Comment.nvim",
 		opts = {
@@ -73,7 +70,6 @@ local plugins = {
 	-- snippets
 	{ "hrsh7th/cmp-buffer" },
 	-- vscode like pictograms for funcs, modules, etc.
-	{ "onsails/lspkind.nvim" },
 
 	-- For folding stuff
 	{
@@ -106,6 +102,14 @@ local plugins = {
 	-- {
 	-- 	"gorbit99/codewindow.nvim",
 	-- },
+
+	-- Removed
+	{ "vonheikemen/lsp-zero.nvim", branch = "v3.x" },
+	{ "williamboman/mason-lspconfig.nvim" },
+	{ "hrsh7th/cmp-nvim-lsp" },
+	{ "onsails/lspkind.nvim" },
+
+	{ "nvim-mini/mini.icons", version = "*" },
 }
 
 local opts = {}
