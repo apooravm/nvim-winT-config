@@ -103,6 +103,8 @@ local plugins = {
 	-- 	"gorbit99/codewindow.nvim",
 	-- },
 
+	{ "lewis6991/gitsigns.nvim" },
+
 	-- Removed
 	{ "vonheikemen/lsp-zero.nvim", branch = "v3.x" },
 	{ "williamboman/mason-lspconfig.nvim" },

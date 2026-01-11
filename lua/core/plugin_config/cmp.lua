@@ -96,6 +96,8 @@ end
 local function cmp_formatter(entry, item)
 	-- 1️⃣ Add icon in text_symbol mode (kind + glyph)
 	local icon = vscode_symbol_map[item.kind]
+	-- temp stores the type of the item - function, object, var, etc
+	local temp = item.kind
 	if icon then
 		item.kind = icon .. " "
 	else
@@ -106,7 +108,8 @@ local function cmp_formatter(entry, item)
 	item.abbr = truncate(item.abbr, maxwidth)
 
 	-- 3️⃣ Add menu label (source)
-	item.menu = "[" .. entry.source.name .. "]"
+	-- item.menu = "[" .. entry.source.name .. "]"
+	item.menu = temp
 
 	-- 4️⃣ Optional: Tailwind CSS colors (keep your existing function)
 	if item.kind:find("Color") then

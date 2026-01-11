@@ -1,10 +1,76 @@
 local lsp_zero = require("lsp-zero")
 
+-- error = '󰅚 ', -- x000f015a
+-- warn = '󰀪 ', -- x000f002a
+-- info = '󰋽 ', -- x000f02fd
+-- hint = '󰌶 ', -- x000f0336
+
+-- error = '󰅚 ', -- x000f015a
+-- warn = '󰀪 ', -- x000f002a
+-- info = '󰋽 ', -- x000f02fd
+-- hint = '󰌶 ', -- x000f0336
+
+local diagnostic_icons = {
+	error = {
+		"", -- nf-fa-times_circle
+		"", -- nf-mdi-close_circle
+		"✖",
+		"󰅚",
+	},
+	warn = {
+		"", -- nf-fa-warning
+		"", -- nf-fa-exclamation_circle
+		"⚠",
+		"󰀪",
+	},
+	info = {
+		"", -- nf-fa-info_circle
+		"", -- nf-mdi-information
+		"ℹ",
+		"󰋽",
+	},
+	hint = {
+		"", -- nf-fa-question_circle
+		"", -- nf-mdi-lightbulb
+		"➤",
+		"󰌵",
+	},
+}
+
+local diagnostic_icons = {
+	error = {
+		"", -- nf-fa-times_circle
+		"", -- nf-mdi-close_circle
+		"✖",
+		"󰅚",
+	},
+	warn = {
+		"", -- nf-fa-warning
+		"", -- nf-fa-exclamation_circle
+		"⚠",
+		"󰀪",
+		"▲",
+	},
+	info = {
+		"", -- nf-fa-info_circle
+		"", -- nf-mdi-information
+		"ℹ",
+		"󰋽",
+	},
+	hint = {
+		"", -- nf-fa-question_circle
+		"", -- nf-mdi-lightbulb
+		"➤",
+		"󰌵",
+		"⚑",
+	},
+}
+
 lsp_zero.set_sign_icons({
-	error = "✘",
-	warn = "▲",
-	hint = "⚑",
-	info = "»",
+	error = diagnostic_icons.error[1],
+	warn = diagnostic_icons.warn[5],
+	-- hint = diagnostic_icons.hint[1],
+	-- info = diagnostic_icons.info[1],
 })
 
 lsp_zero.on_attach(function(client, bufnr)
