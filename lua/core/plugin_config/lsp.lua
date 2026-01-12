@@ -69,8 +69,13 @@ local diagnostic_icons = {
 lsp_zero.set_sign_icons({
 	error = diagnostic_icons.error[1],
 	warn = diagnostic_icons.warn[5],
+<<<<<<< HEAD
 	-- hint = diagnostic_icons.hint[1],
 	-- info = diagnostic_icons.info[1],
+=======
+	hint = diagnostic_icons.hint[4],
+	info = diagnostic_icons.info[4],
+>>>>>>> 2e792f5 (...)
 })
 
 lsp_zero.on_attach(function(client, bufnr)
