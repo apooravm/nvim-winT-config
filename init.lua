@@ -12,12 +12,32 @@ require("core.plugin_config.init")
 
 -- require("luasnip.loaders.from_vscode").lazy_load({ include = { "python" } })
 
+vim.diagnostic.config({
+	-- signs = true,
+	underline = false,
+	virtual_text = true,
+	severity_sort = true,
+	update_in_insert = false,
+	float = { border = "rounded", bg = "NONE" },
+})
+
 require("onedark").setup({
 	--'dark', 'darker', 'cool', 'deep', 'warm', 'warmer', 'light'
 	style = "darker",
 	transparent = true,
 	highlights = {
 		["CursorLineNr"] = { fg = "#ff77a2" },
+	},
+	code_style = {
+		comments = "bold",
+	},
+	lualine = {
+		transparent = true, -- lualine center bar transparency
+	},
+	diagnostics = {
+		darker = true, -- darker colors for diagnostic
+		undercurl = true, -- use undercurl instead of underline for diagnostics
+		background = false,
 	},
 
 	-- cmp_itemkind_reverse = true,
